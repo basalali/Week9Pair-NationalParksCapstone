@@ -1,25 +1,55 @@
 ﻿
-
 @model ParkInfo
 @{
     ViewData["Title"] = "Detail";
+
 }
-@foreach (var item in Model.)
+<img src="~/images/@(Model.park.ParkCode).jpg" /><br />
+<h1>@Model.park.ParkName </h1> <br />
 
-    <img src="~/images/@(Model.ParkCode).jpg" /> <br />
+<p>@Model.park.ParkDescription </p> <br />
+<div>
+    Acreage: @Model.park.Acreage <br />
+    Annual Visitor Count: @Model.park.AnnualVisitorCount <br />
+    Elevation: @Model.park.ElevationInFeet <br />
+    Entry Fee: @Model.park.EntryFee <br />
+    Inspirational Quote: @Model.park.InspirationalQuote <br />
+    Quote source: @Model.park.InspirationalQuoteSource <br />
+    Miles Of Trail: @Model.park.MilesOfTrail <br />
+    Number Of Animal Species: @Model.park.NumberOfAnimalSpecies <br />
+    Number Of Campsites: @Model.park.NumberOfCampsites <br />
+    State: @Model.park.State <br />
+    Year Founded: @Model.park.YearFounded <br />
+</div>
+<h2>Weather Forecast</h2> <br />
+@foreach (var item in Model.weather)
+{
+                          <div>
+                              @*@item.FiveDayForecastValue*@
+                              <img style="width: 10%" src="~/images/@(item.Forecast).png" /><br />
+                              @item.Forecast
+                              @switch (item.Forecast)
+                              {
+                                  case "snow":
+                                      <div>Pack your snow shoes!</div>;
+                                      break;
+                                  case "rain":
+                                      <div>Pack your rain gear and wear waterproof shoes!</div>;
+                                      break;
+                                  case "thunderstorms":
+                                      <div>Seek shelter and avoid hiking on exposed ridges!</div>
+                                      break;
+                                  case "sun":
+                                      <div>Pack sun block!</div>
+                                      break;
+                                  default:
+                                      break;
+                              }
+                              High Temp: @item.High <br />
+                              Low Temp: @item.Low <br />
+                              <br />
+                          </div>
+}
 
-@Model.ParkDescription
 
-@Model.Acreage
-@Model.AnnualVisitorCount
-@Model.ElevationInFeet
-@Model.EntryFee
-@Model.InspirationalQuote
-@Model.InspirationalQuoteSource
-@Model.MilesOfTrail
-@Model.NumberOfAnimalSpecies
-@Model.NumberOfCampsites
-@Model.ParkName
-@Model.State
-@Model.YearFounded
 

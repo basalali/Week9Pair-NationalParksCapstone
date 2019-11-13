@@ -11,7 +11,7 @@ namespace Capstone.Web.DAL
     {
         string connectionString;
 
-        string sql_GetWeather = "SELECT * FROM park WHERE parkCode = @parkCode; ";
+        string sql_GetWeather = "SELECT * FROM weather WHERE parkCode = @parkCode; ";
 
 
         public WeatherDao(string connectionString)

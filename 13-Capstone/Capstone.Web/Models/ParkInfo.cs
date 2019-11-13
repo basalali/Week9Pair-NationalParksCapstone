@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Capstone.Web.DAL
+namespace Capstone.Web.Models
 {
     public class ParkInfo
     {
         public Park park { get; set; }
-        public Weather weather { get; set; }
+        public List<Weather> weather { get; set; }
     }
 }

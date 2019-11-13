@@ -18,20 +18,18 @@ namespace Capstone.Web.Controllers
         {
             this.parkDao = parkDao;
             this.weatherDao = weatherDao;
-
         }
 
         public IActionResult Index()
         {
-            List<Park> parks = parkDao.GetParks();
-           
+            List<Park> parks = parkDao.GetParks();      
             return View(parks);
         }
-
+        
         public IActionResult Detail(string id)
         {
             ParkInfo parkinfo = new ParkInfo();
-
+            //HttpContext.Session.Set();
             parkinfo.park = parkDao.GetParkDetail(id);
             parkinfo.weather = weatherDao.GetWeather(id);
 

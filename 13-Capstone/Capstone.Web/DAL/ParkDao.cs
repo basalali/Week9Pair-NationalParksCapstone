@@ -79,7 +79,7 @@ namespace Capstone.Web.DAL
 
                     if (reader.Read())
                     {
-
+                        park.ParkCode = Convert.ToString(reader["parkCode"]);
                         park.ParkName = Convert.ToString(reader["parkName"]);
                         park.State = Convert.ToString(reader["state"]);
                         park.ParkDescription = Convert.ToString(reader["parkDescription"]);
