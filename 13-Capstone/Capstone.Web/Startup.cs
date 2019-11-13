@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Capstone.Web.DAL;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -29,9 +30,19 @@ namespace Capstone.Web
                 options.CheckConsentNeeded = context => false;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
+            
+            services.AddDistributedMemoryCache();
+            services.AddSession(options =>
+                {
+             // Sets session expiration to 20 minuates
+             options.IdleTimeout = TimeSpan.FromMinutes(20);
+               options.Cookie.HttpOnly = true;
+            });
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddTransient<IParkDao, ParkDao>(dao => new ParkDao(Configuration.GetConnectionString("Default")));
+            services.AddTransient<IWeatherDao, WeatherDao>(dao => new WeatherDao(Configuration.GetConnectionString("Default")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,11 +60,13 @@ namespace Capstone.Web
             app.UseStaticFiles();
             app.UseCookiePolicy();
 
+            app.UseSession();
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Parks}/{action=Index}/{id?}");
             });
         }
     }

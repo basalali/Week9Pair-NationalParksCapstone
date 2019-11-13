@@ -1,0 +1,25 @@
+﻿
+
+@model ParkInfo
+@{
+    ViewData["Title"] = "Detail";
+}
+@foreach (var item in Model.)
+
+    <img src="~/images/@(Model.ParkCode).jpg" /> <br />
+
+@Model.ParkDescription
+
+@Model.Acreage
+@Model.AnnualVisitorCount
+@Model.ElevationInFeet
+@Model.EntryFee
+@Model.InspirationalQuote
+@Model.InspirationalQuoteSource
+@Model.MilesOfTrail
+@Model.NumberOfAnimalSpecies
+@Model.NumberOfCampsites
+@Model.ParkName
+@Model.State
+@Model.YearFounded
+
