@@ -3,7 +3,11 @@
 @{
     ViewData["Title"] = "Detail";
 
+
 }
+
+
+
 <img src="~/images/@(Model.park.ParkCode).jpg" /><br />
 <h1>@Model.park.ParkName </h1> <br />
 
@@ -12,7 +16,7 @@
     Acreage: @Model.park.Acreage <br />
     Annual Visitor Count: @Model.park.AnnualVisitorCount <br />
     Elevation: @Model.park.ElevationInFeet <br />
-    Entry Fee: @Model.park.EntryFee <br />
+    Entry Fee: $@Model.park.EntryFee <br />
     Inspirational Quote: @Model.park.InspirationalQuote <br />
     Quote source: @Model.park.InspirationalQuoteSource <br />
     Miles Of Trail: @Model.park.MilesOfTrail <br />
@@ -21,34 +25,59 @@
     State: @Model.park.State <br />
     Year Founded: @Model.park.YearFounded <br />
 </div>
-<h2>Weather Forecast</h2> <br />
+<h2 style="text-align:center;">Weather Forecast</h2> <a asp-action="SetTempMeasurement" asp-route-id="@Model.park.ParkCode" class="btn btn-success">Change Between Farenheit and Celsius </a><br />
 @foreach (var item in Model.weather)
 {
-                          <div>
-                              @*@item.FiveDayForecastValue*@
-                              <img style="width: 10%" src="~/images/@(item.Forecast).png" /><br />
-                              @item.Forecast
-                              @switch (item.Forecast)
-                              {
-                                  case "snow":
-                                      <div>Pack your snow shoes!</div>;
-                                      break;
-                                  case "rain":
-                                      <div>Pack your rain gear and wear waterproof shoes!</div>;
-                                      break;
-                                  case "thunderstorms":
-                                      <div>Seek shelter and avoid hiking on exposed ridges!</div>
-                                      break;
-                                  case "sun":
-                                      <div>Pack sun block!</div>
-                                      break;
-                                  default:
-                                      break;
-                              }
-                              High Temp: @item.High <br />
-                              Low Temp: @item.Low <br />
-                              <br />
-                          </div>
+    <div style="width: 220px; display:inline-block; vertical-align:top; text-align:center;">
+        <img style="width: 50%" src="~/images/@(item.Forecast).png" /><br />
+
+        @item.Forecast
+        @switch (item.Forecast)
+        {
+            case "snow":
+                <div>Pack your snow shoes!</div>;
+                break;
+            case "rain":
+                <div>Pack your rain gear and wear waterproof shoes!</div>;
+                break;
+            case "thunderstorms":
+                <div>Seek shelter and avoid hiking on exposed ridges!</div>
+                break;
+            case "sun":
+                <div>Pack sun block!</div>
+                break;
+            default:<br />
+                break;
+        }
+
+        
+    
+            <div>High Temp @item.Unit: @item.High</div> <br />
+            <div>LowTemp @item.Unit @item.Low</div> <br />
+        
+
+
+
+        @if (item.High >= 75)
+        {
+
+            <div>Bring an extra gallon of water!</div>
+
+        }
+        @if (item.High - item.Low >= 20)
+        {
+
+            <div>Wear breathable layers!</div>
+
+        }
+        @if (item.Low < 20)
+        {
+            <div>Warning! Low temperature, be cautious of exposure.</div>
+
+        }
+
+        <br />
+    </div>
 }
 
 

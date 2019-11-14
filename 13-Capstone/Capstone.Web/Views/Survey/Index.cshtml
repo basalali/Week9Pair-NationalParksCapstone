@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Capstone.Web.Models.Survey>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2><img style="width:33%" src="~/images/logo.png" /></h2>
+<h2 style="text-align:center; font-weight: 600; ">Survey Results</h2>
+
+<p>
+    <a asp-action="SaveNewSurvey" style="font-weight: 600;" class="btn btn-success" >Submit New Survey </a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+              
+            </th>
+            <th>
+              Park 
+            </th>
+            <th>
+              Votes
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                <img style="width:30%" src="~/images/@(item.ParkCode).jpg" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ParkCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Results)
+            </td>
+
+        </tr>
+}
+    </tbody>
+</table>

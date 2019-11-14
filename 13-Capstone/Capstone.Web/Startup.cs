@@ -43,6 +43,7 @@ namespace Capstone.Web
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddTransient<IParkDao, ParkDao>(dao => new ParkDao(Configuration.GetConnectionString("Default")));
             services.AddTransient<IWeatherDao, WeatherDao>(dao => new WeatherDao(Configuration.GetConnectionString("Default")));
+            services.AddTransient<ISurveyDao, SurveyDao>(dao => new SurveyDao(Configuration.GetConnectionString("Default")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
