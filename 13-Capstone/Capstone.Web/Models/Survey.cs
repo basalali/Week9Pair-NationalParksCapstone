@@ -24,5 +24,7 @@ namespace Capstone.Web.Models
         public string ActivityLevel { get; set; }
 
         public string Results { get; set; }
+
+        public string ParkName { get; set; }
     }
 }

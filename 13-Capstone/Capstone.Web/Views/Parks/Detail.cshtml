@@ -93,25 +93,21 @@
             <div>Low Temp  @item.Low&deg;@item.Unit</div> <br />
 
 
-            @*
-                //TODO -- have appropriate warning signs return for both temps of temperature units.
 
-            *@
-
-            @if (item.High >= 75 || item.High >= 24)
+            @if (item.High >= 75 && item.Unit == "F" || item.High >= 24 && item.Unit == "C")
             {
 
                 <div>Bring an extra gallon of water!</div>
 
             }
 
-            @if (item.Low <= 20)
+            @if (item.Low <= 20 && item.Unit == "F" || item.Low <= -6 && item.Unit == "C")
             {
                 <div>Warning! Low temperature, be cautious of exposure.</div>
 
             }
 
-            @if (item.High - item.Low >= 20)
+            @if (item.High - item.Low >= 20 && item.Unit == "F" || item.High - item.Low >= 11 && item.Unit == "C")
             {
 
                 <div>Wear breathable layers!</div>

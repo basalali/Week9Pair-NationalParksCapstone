@@ -16,14 +16,7 @@ namespace Capstone.Web.Models
 
         public string Unit { get; set; }
 
-        //public int ConverToFaren(int celcius)
-        //{
-        //    int finalFaren;
 
-        //    finalFaren = (int)((celcius - 32) * 5/ 9);
-
-        //    return finalFaren;
-        //}
 
         public int ConverToCelcius(int farenheit)
         {

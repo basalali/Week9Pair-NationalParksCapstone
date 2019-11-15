@@ -20,7 +20,7 @@ namespace Capstone.Web.DAL
 
         string sql_SaveSurvey = "Insert into survey_result(parkCode, emailAddress, state, activityLevel) Values(@parkCode, @email, @state, @activitylevel); ";
 
-        string sql_TopResult = "select Count (parkCode) results, parkCode from survey_result Group by parkCode HAVING Count(parkCode) >= 1 order by Count (parkCode) desc; ";
+        string sql_TopResult = "select Count (sr.parkCode) results, sr.parkCode, park.parkName from survey_result sr JOIN park ON park.parkCode = sr.parkCode Group by park.parkName, sr.parkCode HAVING Count(sr.parkCode) >= 1 order by Count (sr.parkCode) desc ; ";
 
         public IList<Survey> GetTopSurveys()
         {
@@ -42,9 +42,7 @@ namespace Capstone.Web.DAL
 
                         survey.Results = Convert.ToString(reader["results"]);
                         survey.ParkCode = Convert.ToString(reader["parkCode"]);
-                        //survey.ActivityLevel = Convert.ToString(reader["activitylevel"]);
-                        //survey.Email = Convert.ToString(reader["emailAddress"]);
-                        //survey.State = Convert.ToString(reader["state"]);
+                        survey.ParkName = Convert.ToString(reader["parkName"]);
 
                         surveys.Add(survey);
 
@@ -80,6 +78,7 @@ namespace Capstone.Web.DAL
                     cmd.Parameters.AddWithValue(@"email", post.Email);
                     cmd.Parameters.AddWithValue(@"state", post.State);
                     cmd.Parameters.AddWithValue(@"activitylevel", post.ActivityLevel);
+
                     if (cmd.ExecuteNonQuery() > 0)
                     {
                         result = true;
