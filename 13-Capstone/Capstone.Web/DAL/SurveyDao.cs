@@ -1,6 +1,8 @@
 ﻿using Capstone.Web.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
@@ -17,6 +19,8 @@ namespace Capstone.Web.DAL
 
             this.connectionString = connectionString;
         }
+
+        string sql_ParkCode = "SELECT * from park; ";
 
         string sql_SaveSurvey = "Insert into survey_result(parkCode, emailAddress, state, activityLevel) Values(@parkCode, @email, @state, @activitylevel); ";
 
@@ -96,10 +100,33 @@ namespace Capstone.Web.DAL
 
             return result;
         }
+
+        public IDictionary<string, string> GetParkNames()
+        {
+            IDictionary<string, string> names = new Dictionary<string, string>();
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlCommand cmd = new SqlCommand())
+            {
+                cmd.Connection = conn;
+                conn.Open();
+                cmd.CommandText = sql_ParkCode;
+
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    names.Add(Convert.ToString(reader["parkCode"]), Convert.ToString(reader["parkName"]));
+                }
+
+
+            }
+
+            return names;
+
+        }
+
     }
-
-
-
-
 }
+
 

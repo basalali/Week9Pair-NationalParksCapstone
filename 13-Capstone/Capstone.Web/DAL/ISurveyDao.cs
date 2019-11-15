@@ -12,5 +12,6 @@ namespace Capstone.Web.DAL
 
         bool SaveNewSurvey(Survey post);
 
+      IDictionary<string, string> GetParkNames();
     }
 }

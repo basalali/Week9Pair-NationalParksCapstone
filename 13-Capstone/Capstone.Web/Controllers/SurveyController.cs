@@ -28,6 +28,7 @@ namespace Capstone.Web.Controllers
         [HttpGet]
         public IActionResult SaveNewSurvey()
         {
+            ViewBag.names = surveyDao.GetParkNames();
             Survey survey = new Survey();
             return View(survey);
         }

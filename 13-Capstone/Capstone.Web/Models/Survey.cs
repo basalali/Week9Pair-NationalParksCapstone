@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -8,7 +9,7 @@ namespace Capstone.Web.Models
 {
     public class Survey
     {
-        [MinLength(3, ErrorMessage = "Please enter at least three characters")]
+
         [Required]
         public string ParkCode { get; set; }
 
@@ -16,7 +17,6 @@ namespace Capstone.Web.Models
         [Required]
         public string Email { get; set; }
 
-        [MinLength(2, ErrorMessage = "Please enter at least two characters")]
         [Required]
         public string State { get; set; }
 
@@ -26,5 +26,6 @@ namespace Capstone.Web.Models
         public string Results { get; set; }
 
         public string ParkName { get; set; }
+ 
     }
 }
