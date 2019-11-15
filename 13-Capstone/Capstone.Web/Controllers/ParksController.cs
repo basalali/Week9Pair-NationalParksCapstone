@@ -47,25 +47,27 @@ namespace Capstone.Web.Controllers
 
             if (current == "F")
             {
+                // TODO: write boolean tests to distinguid between farenheit and celcius -- BOOLEAN Properties.
+                foreach (var item in parkinfo.weather)
+                {
+                    item.High = item.High;
+                    item.Low = item.Low;
 
+                    item.Unit = current;
+                }
+            }
+
+            else if (current == "C")
+            {
                 foreach (var item in parkinfo.weather)
                 {
                     item.High = item.ConverToCelcius(item.High);
                     item.Low = item.ConverToCelcius(item.Low);
                     item.Unit = current;
                 }
-            }
-
-            else
-            {
-                foreach (var item in parkinfo.weather)
-                {
-                    item.High = item.ConverToFaren(item.High);
-                    item.Low = item.ConverToFaren(item.Low);
-                    item.Unit = current;
-                }
 
             }
+
 
 
             return View(parkinfo);
